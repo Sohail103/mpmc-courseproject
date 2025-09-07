@@ -30,6 +30,8 @@ while running:
     screen.fill((0,0,0))        # background
 
     screen.set_at((x,y), (255,255,255))
+
+    angle += 1
     
     pygame.display.flip()       # updates screen
     clock.tick(60)             # 60 fps
