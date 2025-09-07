@@ -12,14 +12,15 @@ pygame.display.set_caption("Oscilloscope screen")
 clock = pygame.time.Clock()
 
 fade_surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
-fade_surface.set_alpha(15)
+fade_surface.set_alpha(1)
 fade_surface.fill((0,0,0))
 
 # main loop
 
 running = True
 
-angle = 0
+angle1 = 0
+angle2 = 0
 amplitude = 200
 frequency = 10
 
@@ -29,22 +30,23 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    #x = int(CENTER_X + radius*math.cos(math.radians(angle)))
-    #y = int(CENTER_Y + radius*math.sin(math.radians(angle)))
-    #angle += 1
-
     screen.blit(fade_surface, (0,0))
 
-    x = CENTER_X + amplitude * math.sin(math.radians(frequency * angle))
-    y = CENTER_Y
+    x1 = CENTER_X + amplitude * math.sin(math.radians(frequency * angle1))
+    y1 = CENTER_Y
 
     #screen.fill((0,0,0))        # background
 
     #screen.set_at((x,y), (255,255,255))
-    pygame.draw.circle(screen, (255,255,255), (x,y), 2)
-    angle += 0.1
+    pygame.draw.circle(screen, (255,255,255), (x1,y1), 2)
+    angle1 += 0.1
+
+    x2 = int(CENTER_X + amplitude*math.cos(math.radians(angle2)))
+    y2 = int(CENTER_Y + amplitude*math.sin(math.radians(angle2)))
+    angle2 += 1
+    pygame.draw.circle(screen, (255,255,255), (x2,y2), 2)
     
     pygame.display.flip()       # updates screen
-    clock.tick(60)              # 60 fps
+    clock.tick(1000)              # 60 fps
 
 pygame.quit()
