@@ -14,15 +14,24 @@ clock = pygame.time.Clock()
 fade_surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
 fade_surface.set_alpha(1)
 fade_surface.fill((0,0,0))
-
 # main loop
 
-running = True
+l1stat = l2stat = l3stat = l4stat = 0
 
-angle1 = 0
-angle2 = 0
-amplitude = 200
-frequency = 10
+(l1x1, l1y1) = (-1, 1)
+(l1x2, l1y2) = (1, 1)
+(l2x1, l2y1) = (1, 1)
+(l2x2, l2y2) = (1, -1)
+(l3x1, l3y1) = (1, -1)
+(l3x2, l3y2) = (-1, -1)
+(l4x1, l4y1) = (-1, -1)
+(l4x2, l4y2) = (-1, 1)
+
+step = 0.01
+xstep = ystep = 0
+x = y = 0                   # main point that will be displayed
+
+running = True
 
 while running:
 
@@ -32,19 +41,15 @@ while running:
 
     screen.blit(fade_surface, (0,0))
 
-    x1 = CENTER_X + amplitude * math.sin(math.radians(frequency * angle1))
-    y1 = CENTER_Y
+    if (l1stat==0):
+        xstep = (l1x2-l1x1)*step
+        ystep = (l1y2-l1y1)*step
 
-    #screen.fill((0,0,0))        # background
+    pygame.draw.circle(screen, (255,255,255), (x,y), 2)
 
-    #screen.set_at((x,y), (255,255,255))
-    pygame.draw.circle(screen, (255,255,255), (x1,y1), 2)
-    angle1 += 0.1
-
-    x2 = int(CENTER_X + amplitude*math.cos(math.radians(angle2)))
-    y2 = int(CENTER_Y + amplitude*math.sin(math.radians(angle2)))
-    angle2 += 1
-    pygame.draw.circle(screen, (255,255,255), (x2,y2), 2)
+    if (x < l1x2 && y < l1y2):
+        x += xstep
+        y += ystep
     
     pygame.display.flip()       # updates screen
     clock.tick(1000)              # 60 fps
