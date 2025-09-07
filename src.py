@@ -6,7 +6,7 @@ SCREEN_HEIGHT = 512
 CENTER_X = SCREEN_WIDTH // 2 
 CENTER_Y = SCREEN_HEIGHT // 2
 
-pygame.init()
+pygame.display.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pygame.display.set_caption("Oscilloscope screen")
 clock = pygame.time.Clock()
@@ -24,14 +24,16 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-    x = int(CENTER_X + radius*math.cos(math.radians(angle)))
-    y = int(CENTER_Y + radius*math.sin(math.radians(angle)))
+    #x = int(CENTER_X + radius*math.cos(math.radians(angle)))
+    #y = int(CENTER_Y + radius*math.sin(math.radians(angle)))
+    #angle += 1
 
-    screen.fill((0,0,0))        # background
+    x = int(256*math.sin(math.radians(clock.get_time()))) + CENTER_X
+    y = CENTER_Y
+
+    #screen.fill((0,0,0))        # background
 
     screen.set_at((x,y), (255,255,255))
-
-    angle += 1
     
     pygame.display.flip()       # updates screen
     clock.tick(60)             # 60 fps
