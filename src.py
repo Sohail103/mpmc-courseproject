@@ -8,7 +8,7 @@ CENTER_Y = SCREEN_HEIGHT // 2
 
 pygame.display.init()
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Oscilloscope screen")
+pygame.display.set_caption("oscilloscope screen")
 clock = pygame.time.Clock()
 
 fade_surface = pygame.Surface((SCREEN_WIDTH, SCREEN_HEIGHT))
